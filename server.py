@@ -12,14 +12,14 @@ RESPONSE_FILE = "response.html"
 class FormHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         """Serve HTML form from a file"""
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
         # Read HTML from file or use fallback if file doesn't exist
         with open(HTML_FILE, 'r') as f:
             html_content = f.read()
             self.wfile.write(html_content.encode())
-
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
         
 
     def do_POST(self):
